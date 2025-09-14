@@ -4,7 +4,7 @@ This minimal sketch for Arduino UNO (and some other supported boards) turns just
 USB/Serial/UART MIDI data are filtered and adapted to SDI for speed and reliability.
 
 ### MIDI commands natively supported by VS1053b (XDCS)
-Command|Name|Parameters|c = Channel #
+Command|Name|Parameters｜c = Channel #
 -|-|-
 `8c nn xx`|Note Off|nn = Note #<br>xx = Don't care
 `9c nn vv`|Note On|nn = Note #<br>vv = Velocity (0 = note off)
@@ -38,7 +38,7 @@ Command/SysEx|Name|Parameter(s)
 `F0 00 01 11 03 0v F7`|Reverb Setting|0 = Default, 1 = Off, 2-15 = Overridden Decay Level
 
 ### Button Panel Controls for Waveshare Music Shield
-Button Name|Symbol|Arduino & Shield Pin|Description|Activity LED Pin: 8
+Button Name|Symbol|Arduino & Shield Pin|Description｜Activity LED Pin: 8
 -|-|-|-
 Reverb|⏯️|5|Press to toggle. Dim and bright LED blinks for off and on respectively. On by default.
 Reset|⏮️|6|Press once to reset the synth to it's initial GM parameters. Faster than Arduino's built-in Reset button.
