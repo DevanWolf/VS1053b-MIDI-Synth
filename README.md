@@ -29,8 +29,11 @@ Command|Name|Parameters｜c = Channel #
 ### Additional MIDI commands and SysEx implemented and wrapped (to XCS)
 Command/SysEx|Name|Parameter(s)
 -|-|-
+`Bc 7E xx`|Mono Channel Mode|xx = Don't care
+`Bc 7F xx`|Poly Channel Mode|xx = Don't care
 `FF`| System Reset
-`F0 7E 7F 09 01 F7`|GM Reset
+`F0 7E 7F 09 01 F7`|GM On
+`F0 7E 7F 09 02 F7`|GM Off|(Enters minimal 4-poly synth mode)
 `F0 7F 7F 04 01 xx vv F7`|Master Volume|vv = Value<br>xx = Don't care
 `F0 7F 7F 04 02 +x vv F7`|Master Panning|vv = Value<br>+>=4 = +1 to Value<br>x = N/A
 `F0 00 01 11 01 0v F7`|EarSpeaker Setting|0 = Off, 1 = Low, 2 = Mid, 3 = High
@@ -54,7 +57,6 @@ VS1053b/Shield Pin|Arduino Pin|Description
 MISO|12|SPI Master In, Slave Out
 MOSI|11|SPI Master Out, Slave In
 SCK|13|SPI Serial Clock
-DREQ|A1|Data Request (ready signal)
 XRST|A0|Reset (active low)
 XCS|A3|Command Chip Select (active low)
 XDCS|A2|Data Chip Select (active low)
@@ -62,7 +64,7 @@ XDCS|A2|Data Chip Select (active low)
 ## Software Requirements
 * [CH340 USB Driver](https://wch-ic.com/downloads/ch341ser_exe.html)
 * [Arduino IDE](https://docs.arduino.cc/software/ide)
-* OmniSerial (eventually), [EA Serial MIDI Bridge](https://github.com/ezequielabregu/EA-serialmidi-bridge/releases), or [Hairless MIDI<->Serial Bridge](https://github.com/tyan0/hairless-midiserial/releases) (for Windows/Mac users)
+* OmniSerial (eventually), [EA Serial MIDI Bridge](https://github.com/ezequielabregu/EA-serialmidi-bridge/releases), [Hairless MIDI<->Serial Bridge](https://github.com/tyan0/hairless-midiserial/releases) (for Windows/Mac users), or [KAWAI GMegaRSNT](https://geocities.ws/devan/Drivers/KAWAI%20Serial%20MIDI%20NT%20Driver%2032bit.zip) (Windows 32-bit only)
 * [loopMIDI (for Windows users)](https://tobias-erichsen.de/software/loopmidi.html)
 * A MIDI application (player, sequencer, utility, or game)
 
@@ -71,4 +73,13 @@ XDCS|A2|Data Chip Select (active low)
 2. Open the downloaded sketch file in Arduino IDE
 3. Make sure your Arduino board is connected to your computer, select the correct board type (UNO in that case), and **Upload**!
 
-NOTE: Make sure your Serial MIDI driver or bridge is not active, otherwise the program will fail to upload due to serial confliction. Then you can turn on your Serial MIDI driver/bridge afterwards.<br>In case you have a different Music Shield that doesn't have control buttons nor an LED, you can remove one or all of the 5 #define lines for the button definitions and LED to tell the compiler not to use those features.<br>Baud rates 31250, 9600, 38400, and 57600 can be used instead of the default 115200 for use with the standard MIDI protocol or different serial MIDI software/drivers.
+NOTE: Make sure your Serial MIDI driver or bridge is not active, otherwise the program will fail to upload due to serial confliction. Then you can turn on your Serial MIDI driver/bridge afterwards.<br>In case you have a different Music Shield that doesn't have control buttons nor an LED, you can remove one or all of the 5 #define lines for the button definitions and LED to tell the compiler not to use those features.<br>Baud rates 31250, 38400, 9600, and 57600 can be used instead of the default 115200 for use with the standard MIDI protocol or different serial MIDI software/drivers.
+
+## Links
+* [VS1053b](https://vlsi.fi/en/products/vs1053.html) ([datasheet](https://vlsi.fi/fileadmin/datasheets/vs1053.pdf))
+* [Waveshare Music Shield](https://www.waveshare.com/wiki/Music_Shield)
+* [Adafruit VS1053 Codec](https://www.adafruit.com/product/1381)
+* [Adafruit Music Maker MP3 Shield](https://www.adafruit.com/product/1788)
+* [Sparkfun MP3 Player Shield](https://www.sparkfun.com/sparkfun-mp3-player-shield.html)
+* [HandsOn Tech VS1053b MP3 Arduino Shield](https://handsontec.com/index.php/product/vs1053b-mp3-arduino-shield)
+* [Arduino UNO](https://docs.arduino.cc/hardware/uno-rev3)
