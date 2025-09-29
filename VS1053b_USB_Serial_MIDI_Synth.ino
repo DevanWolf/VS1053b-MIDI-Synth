@@ -171,7 +171,7 @@ void loop() {
 					if (cmd >> 4 == 11 and value >= 126) polymono = bitWrite(polymono, cmd & 0x0F, value == 126);
 					else if (!(cmd >> 4 == 11 and ((value >= 1 and value <= 5) or value == 8 or value == 9 or (value >= 13 and value <= 37) or value == 65 or (value >= 67 and value <= 90) or (value >= 92 and value <= 97) or (value >= 102 and value <= 119) or value == 122))) { // filter out unassigned CCs
 						if (cmd >> 4 == 9 and bitRead(polymono, cmd & 0x0F)) midiByte(cmd | 0x20, 120, 0); // emulates mono mode by performing All Sound Off every note on
-						midiByte(cmd, value, cmd >> 4 == 8 ? 0 : data);
+						midiByte(cmd, value, data);
 					}
 					value = -1;
 				}
@@ -191,7 +191,7 @@ void loop() {
 		else {
 			if (data == 0xF7 and cmd == 0xF0) {
 				if (sysex[1] == 0x7F) {
-					if (sysex[0] == 0x7E and sysex[2] == 9 and (sysex[3] >= 1 or sysex[3] <= 3) and value == 3) {
+					if (sysex[0] == 0x7E and sysex[2] == 9 and sysex[3] >= 1 and sysex[3] <= 3 and value == 3) {
 						volume = 0;
 						balance = 0;
 						polymono = 0;
