@@ -29,11 +29,8 @@ Command|Name|Parameters｜c = Channel #
 ### Additional MIDI commands and SysEx implemented and wrapped (to XCS)
 Command/SysEx|Name|Parameter(s)
 -|-|-
-`Bc 7E xx`|Mono Channel Mode|xx = Don't care
-`Bc 7F xx`|Poly Channel Mode|xx = Don't care
 `FF`| System Reset
-`F0 7E 7F 09 01 F7`|GM On
-`F0 7E 7F 09 02 F7`|GM Off|(Enters minimal 4-poly synth mode)
+`F0 7E 7F 09 01 F7`|GM Reset
 `F0 7F 7F 04 01 xx vv F7`|Master Volume|vv = Value<br>xx = Don't care
 `F0 7F 7F 04 02 +x vv F7`|Master Panning|vv = Value<br>+>=4 = +1 to Value<br>x = N/A
 `F0 00 01 11 01 0v F7`|EarSpeaker Setting|0 = Off, 1 = Low, 2 = Mid, 3 = High
@@ -62,13 +59,13 @@ XCS|A3|Command Chip Select (active low)
 XDCS|A2|Data Chip Select (active low)
 
 ## Software Requirements
-* [CH340 USB Driver](https://wch-ic.com/downloads/ch341ser_exe.html)
+* [CH340 (Arduino UNO) USB Driver](https://wch-ic.com/downloads/ch341ser_exe.html)
 * [Arduino IDE](https://docs.arduino.cc/software/ide)
-* OmniSerial (eventually), [EA Serial MIDI Bridge](https://github.com/ezequielabregu/EA-serialmidi-bridge/releases), [Hairless MIDI<->Serial Bridge](https://github.com/tyan0/hairless-midiserial/releases) (for Windows/Mac users), or [KAWAI GMegaRSNT](https://geocities.ws/devan/Drivers/KAWAI%20Serial%20MIDI%20NT%20Driver%2032bit.zip) (Windows 32-bit only)
-* [loopMIDI (for Windows users)](https://tobias-erichsen.de/software/loopmidi.html)
+* OmniSerial (eventually), [Hairless MIDI<->Serial Bridge](https://github.com/tyan0/hairless-midiserial/releases) (for Windows/Mac users), or [KAWAI GMegaRSNT Serial MIDI Driver](https://geocities.ws/devan/Drivers/KAWAI%20Serial%20MIDI%20NT%20Driver%2032bit.zip) (Windows 32-bit only)
+* [MIDI Yoke NG (for Windows users)](https://www.hermannseib.com/programs/myokeng.exe)
 * A MIDI application (player, sequencer, utility, or game)
 
-## How to install the program onto your Arduino
+## How to flash (install) the program onto your Arduino
 1. Download the .ino sketch, saving it into a new folder
 2. Open the downloaded sketch file in Arduino IDE
 3. Make sure your Arduino board is connected to your computer, select the correct board type (UNO in that case), and **Upload**!
