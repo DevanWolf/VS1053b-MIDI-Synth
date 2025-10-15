@@ -208,7 +208,7 @@ void loop() {
 #endif
 		reverbOff = !reverbOff;
 		writeRegisterSplit(7, 0x1e, 3);
-		writeRegisterSplit(6, 0, (byte)reverbOff);
+		writeRegisterSplit(6, 0, reverbOff);
 #ifdef LED
 		if (!reverbOff) delayMicroseconds(10000);
 		digitalWrite(LED, LOW);
