@@ -4,27 +4,27 @@ This minimal sketch for Arduino UNO (and some other supported boards) turns just
 USB/Serial/UART MIDI data are filtered and adapted to SDI for speed and reliability.
 
 ### MIDI commands natively supported by VS1053b (XDCS)
-Command|Name|Parameters｜c = Channel #
+Command|Name|Parameters｜n = Channel #
 -|-|-
-`8c nn xx`|Note Off|nn = Note #<br>xx = Don't care
-`9c nn vv`|Note On|nn = Note #<br>vv = Velocity (0 = note off)
-`Bc 00 vv`|Channel Mode (Bank Select)|0 = Default, 121 = Melodic, 120/127 = Drum
-`Bc 06 vv`|RPN Data Entry|vv = Value
-`Bc 07 vv`|Channel Volume|vv = Value (100 = Default)
-`Bc 0A vv`|Channel Panpot|vv = Value (64 = Default)
-`Bc 0B vv`|Expression|vv = Value
+`8n kk xx`|Note Off|kk = Note #<br>xx = Don't care
+`9n kk vv`|Note On|kk = Note #<br>vv = Velocity (0 = note off)
+`Bn 00 vv`|Channel Mode (Bank Select)|0 = Default, 121 = Melodic, 120/127 = Drum
+`Bn 06 vv`|RPN Data Entry|vv = Value
+`Bn 07 vv`|Channel Volume|vv = Value (100 = Default)
+`Bn 0A vv`|Channel Panpot|vv = Value (64 = Default)
+`Bn 0B vv`|Expression|vv = Value
 `Bx 0C vv`|Global Reverb Decay|x = Don't care<br>vv = Value
-`Bc 40 vx`|Sustain|v<4 = Off, v>=4 = On<br>x = Don't care
-`Bc 42 vx`|Sostenuto|v<4 = Off, v>=4 = On<br>x = Don't care
-`Bc 5B vv`|Channel Reverb Level|vv = value (40 = Default)
-`Bc 62 xx`<br>`Bc 63 xx`|Deselect RPN|xx = Don't care
-`Bc 63 vv`|RPN LSB|0 = Pitch Bend Range, 2 = Transpose/Coarse Tune, 1/3-127 = None
-`Bc 64 vv`|RPN MSB|0 = On, 1-127 = Off
-`Bc 78 xx`|All Sound Off|xx = Don't care
-`Bc 79 xx`|Reset All Controllers|xx = Don't care
-`Bc 7B xx`<br>`Bc 7C xx`<br>`Bc 7D xx`|All Notes Off|xx = Don't care
-`Cc vv`|Program Change|vv = General MIDI Instrument # for melodic, else don't care for drum
-`Ec ll mm`|Pitch Bend|ll = Value LSB<br>mm = Value MSB (8192 = center)
+`Bn 40 vx`|Sustain|v<4 = Off, v>=4 = On<br>x = Don't care
+`Bn 42 vx`|Sostenuto|v<4 = Off, v>=4 = On<br>x = Don't care
+`Bn 5B vv`|Channel Reverb Level|vv = value (40 = Default)
+`Bn 62 xx`<br>`Bn 63 xx`|Deselect RPN|xx = Don't care
+`Bn 63 vv`|RPN LSB|0 = Pitch Bend Range, 2 = Transpose/Coarse Tune, 1/3-127 = None
+`Bn 64 vv`|RPN MSB|0 = On, 1-127 = Off
+`Bn 78 xx`|All Sound Off|xx = Don't care
+`Bn 79 xx`|Reset All Controllers|xx = Don't care
+`Bn 7B xx`<br>`Bn 7C xx`<br>`Bn 7D xx`|All Notes Off|xx = Don't care
+`Cn vv`|Program Change|vv = General MIDI Instrument # for melodic, else don't care for drum
+`En ll mm`|Pitch Bend|ll = Value LSB<br>mm = Value MSB (8192 = center)
 
 ### Additional MIDI commands and SysEx implemented and wrapped (to XCS)
 Command/SysEx|Name|Parameter(s)
@@ -32,7 +32,7 @@ Command/SysEx|Name|Parameter(s)
 `FF`| System Reset
 `F0 7E 7F 09 01 F7`|GM Reset
 `F0 7F 7F 04 01 xx vv F7`|Master Volume|vv = Value<br>xx = Don't care
-`F0 7F 7F 04 02 +x vv F7`|Master Panning|vv = Value<br>+>=4 = +1 to Value<br>x = N/A
+`F0 7F 7F 04 02 +x vv F7`|Master Panning|vv = Value<br>+>=4 = +1 to Value<br>x = Don't care
 `F0 00 01 11 01 0v F7`|EarSpeaker Setting|0 = Off, 1 = Low, 2 = Mid, 3 = High
 `F0 00 01 11 02 bl th F7`|Bass & Treble Setting|b = Bass Enhancement in 1 dB steps<br>l = Bass lower limit frequency in 1000Hz steps<br>t = Treble Control in 1.5 dB steps<br>h = Treble lower limit frequency in 10Hz steps
 `F0 00 01 11 03 0v F7`|Reverb Setting|0 = Default, 1 = Off, 2-15 = Overridden Decay Level
@@ -61,7 +61,7 @@ XDCS|A2|Data Chip Select (active low)
 ## Software Requirements
 * [CH340 (Arduino UNO) USB Driver](https://wch-ic.com/downloads/ch341ser_exe.html)
 * [Arduino IDE](https://docs.arduino.cc/software/ide)
-* OmniSerial (eventually), [Hairless MIDI<->Serial Bridge](https://github.com/tyan0/hairless-midiserial/releases) (for Windows/Mac users), or [KAWAI GMegaRSNT Serial MIDI Driver](https://geocities.ws/devan/Drivers/KAWAI%20Serial%20MIDI%20NT%20Driver%2032bit.zip) (Windows 32-bit only)
+* OmniSerial (eventually), [Hairless MIDI<->Serial Bridge](https://github.com/tyan0/hairless-midiserial/releases), or [KAWAI GMegaRSNT Serial MIDI Driver](https://geocities.ws/devan/Drivers/KAWAI%20Serial%20MIDI%20NT%20Driver%2032bit.zip) (Windows 32-bit only)
 * [MIDI Yoke NG (for Windows users)](https://www.hermannseib.com/programs/myokeng.exe)
 * A MIDI application (player, sequencer, utility, or game)
 
